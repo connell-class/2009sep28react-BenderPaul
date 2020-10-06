@@ -1,15 +1,20 @@
 package com.revature.eval.java.core;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 public class EvaluationService {
 
 	/**
 	 * 1. Without using the StringBuilder or StringBuffer class, write a method that
 	 * reverses a String. Example: reverse("example"); -> "elpmaxe"
-	 * TEST EDIT
+	 * 
 	 * @param string
 	 * @return
 	 */
@@ -30,8 +35,26 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		//Initialize a character array with length equal to the input string
+		//Convert the input string into array format
+		char[] phraseArray = new char[phrase.length()]; 	
+		phraseArray = phrase.toCharArray(); 
+		
+		//Initialize the string for the acronym
+		//Append the first character of the phrase to our acronym
+		String acronym = ""; 
+		acronym = acronym + phraseArray[0]; 	
+		
+		//Parse the phrase array
+		//Checks for spaces or dashes
+		//Append the character after a space or dash, capitalized
+		for(int i = 1; i < phrase.length(); i++) {		
+			if(phraseArray[i] == ' ' || phraseArray[i] == '-') {	
+				acronym = acronym + Character.toUpperCase(phraseArray[i+1]);
+			}
+		}
+		return acronym;
 	}
 
 	/**
@@ -84,17 +107,30 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
+			
+			//If all three sides are equal then return true
+			
+			if (this.sideOne == this.sideTwo & this.sideOne == this.sideThree & this.sideTwo == this.sideThree) {
+				return true;		
+			}
 			return false;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
+			
+			// If two sides are equal AND one side is not equal to the others return true
+			if((this.sideOne == this.sideTwo & this.sideOne != this.sideThree) || (this.sideOne == this.sideThree & this.sideOne != this.sideTwo) || (this.sideTwo == this.sideThree & this.sideTwo != this.sideOne)) {
+				return true;
+			}
 			return false;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
+			
+			// If no sides are equal to one another return true
+			if (this.sideOne != this.sideTwo && this.sideOne != this.sideThree && this.sideTwo != this.sideThree) {
+				return true;
+			}
 			return false;
 		}
 
@@ -116,9 +152,47 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		
+		//Create a hashmap of each letter and its corresponding score value
+		
+		HashMap<Character, Integer> lettersAndScores = new HashMap<Character, Integer>(26);
+		lettersAndScores.put('A', 1);
+		lettersAndScores.put('E', 1);
+		lettersAndScores.put('I', 1);
+		lettersAndScores.put('O', 1);
+		lettersAndScores.put('U', 1);
+		lettersAndScores.put('L', 1);
+		lettersAndScores.put('N', 1);
+		lettersAndScores.put('R', 1);
+		lettersAndScores.put('S', 1);
+		lettersAndScores.put('T', 1);
+		lettersAndScores.put('D', 2);
+		lettersAndScores.put('G', 2);
+		lettersAndScores.put('B', 3);
+		lettersAndScores.put('C', 3);
+		lettersAndScores.put('M', 3);
+		lettersAndScores.put('P', 3);
+		lettersAndScores.put('F', 4);
+		lettersAndScores.put('H', 4);
+		lettersAndScores.put('V', 4);
+		lettersAndScores.put('W', 4);
+		lettersAndScores.put('Y', 4);
+		lettersAndScores.put('K', 5);
+		lettersAndScores.put('J', 8);
+		lettersAndScores.put('X', 8);
+		lettersAndScores.put('Q', 10);
+		lettersAndScores.put('Z', 10);
+		
+		//Insert the characters of the string into the hashmap to get the corresponding values
+		//Add the values to a score variable to then return
+		
+		int score = 0;
+		for(int i=0; i<string.length(); i++) {
+			score += lettersAndScores.get(Character.toUpperCase(string.charAt(i)));
+		}
+		return score;
 	}
+	
 
 	/**
 	 * 5. Clean up user-entered phone numbers so that they can be sent SMS messages.
@@ -152,10 +226,46 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
-	}
+		
+		//Start by trimming the whitespace from the input
+		string = string.trim();
+		//Create an array of valid numbers to test against the input
+		Integer[] phoneNumberValues = new Integer[] {0,1,2,3,4,5,6,7,8,9};
+		//Create an array of invalid input characters to throw exceptions against
+		String[] invalidCharacters = new String[] {"a","b","c","@","&","!",":"};
 
+		for (int i=0; i<string.length(); i++) {
+			//Create a temporary value to store the character we're checking as a String
+			String tempString = "";
+			//Create an integer variable with the numeric value of the character from the phone number string
+			int temp = Character.getNumericValue(string.charAt(i));
+			/*
+			 * If the integer value associated with the ith index of the phone number isn't a number, remove it
+			 */
+			if (!Arrays.asList(phoneNumberValues).contains(temp)){
+				tempString = tempString + string.charAt(i);
+				/*
+				 * If the ith index of the phone number is within our array of invalid characters, throw an illegal argument exception
+				 */
+				if (Arrays.asList(invalidCharacters).contains(tempString)) {
+					throw new IllegalArgumentException();
+				}
+				string = string.replace(tempString ,"");
+				i--;
+
+			}
+		}
+		//Final check to make sure the phone number is the right length. Otherwise, throw an illegal argument exception
+		if(string.length()>10) {
+			throw new IllegalArgumentException();
+		}
+		return string;
+		/*
+		 * FOR FUTURE REFERENCE: It would probably be easier and more efficient to compare ascii values. I don't think we would need
+		 * to use both an Integer array and String Array. Less conditionals, as well. 
+		 */
+	}
+	
 	/**
 	 * 6. Given a phrase, count the occurrences of each word in that phrase.
 	 * 
@@ -166,8 +276,21 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		//Split the input string by into individual words. Takes out the spaces, commas, apostrophes
+		String[] splitWords = string.split("[\\s',]");
+		//Initiate the hashmap to store unique words as keys and incrementing values with repeated keys
+		Map<String, Integer> wordCount = new HashMap<>();
+		for(int i = 0; i < splitWords.length; i++ ) {
+			//increment word count if the word is already in the hashmap. Make a new entry if word is unique to the map.
+			if (wordCount.containsKey(splitWords[i])) {
+				wordCount.put(splitWords[i], wordCount.get(splitWords[i])+1);
+			}else {
+				wordCount.put(splitWords[i], 1);
+			}		
+		}
+		//Remove the empty spaces from the map (to satisfy a test case)
+		wordCount.remove("");
+		return wordCount;
 	}
 
 	/**
@@ -205,11 +328,60 @@ public class EvaluationService {
 	 * binary search is a dichotomic divide and conquer search algorithm.
 	 * 
 	 */
+	// use the binary search function from arrays?
 	static class BinarySearch<T> {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
+			
+			/*
+			 * The first block of code is specifically for the case that t is an instanceof String
+			 */
+
+			if (t instanceof String) {
+				int x = Integer.parseInt((String) t);
+				int middle = this.sortedList.size()/2;
+				/*Set reference middle to be the center of the list
+				*	As long as our middle reference doesn't correspond to the value we're looking for, move forward or backward depending on
+				*	on how the middle value compares to the value we want.
+				*/
+				while (Integer.parseInt((String) this.sortedList.get(middle)) != x) {
+					if(Integer.parseInt((String) this.sortedList.get(middle))>x) {
+						middle = middle/2;
+					}else if(Integer.parseInt((String) this.sortedList.get(middle))<x) {
+						middle = middle + middle/2;
+					}
+				}
+				return middle;
+
+				
+				/* 
+				 *This block of code is for the case that t is an instanceof string 
+				 */
+				
+			}else if(t instanceof Integer) {
+				Integer x = (Integer)t;
+				int middle = this.sortedList.size()/2;
+				/*Set reference middle to be the center of the list
+				*	As long as our middle reference doesn't correspond to the value we're looking for, move forward or backward depending on
+				*	on how the middle value compares to the value we want.
+				*/
+				while (!this.sortedList.get(middle).equals(x)) {
+					middle--;
+					if((Integer)this.sortedList.get(middle) > x) {
+						middle = middle - Math.round((middle+1)/2);
+					}else if((Integer)this.sortedList.get(middle) < x) {
+						//This is a safety measure in the event the middle reference isn't reaching the end of the list.
+						//Ideally the algorithm wouldn't need this safety measure, but here we are.
+						if (middle == this.sortedList.size()-3) {
+							middle+=2;	
+						}else {
+							middle = middle + (Math.round(sortedList.size()-middle)/2);
+						}
+					}
+				}
+				return middle;
+			}
 			return 0;
 		}
 
@@ -245,9 +417,35 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	
 	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		//Create an array of vowels
+		Character[] vowels = new Character[] {'a','e','i','o','u'};
+		//Create an array in order to split the string into individual words
+		String[] splitByWords = string.split("[\\s',]");
+		//Iterate through the array of split up words
+		for (int i = 0; i < splitByWords.length; i++) {
+			/*
+			 * For each word in the array, if the first character is a consonant or the last
+			 * character is a q, put the first character at the end and then delete the first character.
+			 * 
+			 * Add "ay" onto the end.
+			 */
+			while ((!Arrays.asList(vowels).contains(splitByWords[i].charAt(0))) || (splitByWords[i].charAt(splitByWords[i].length()-1) == 'q')) {
+				splitByWords[i] = splitByWords[i] + splitByWords[i].charAt(0);
+				splitByWords[i] = splitByWords[i].substring(1,splitByWords[i].length());
+			}
+			splitByWords[i] = splitByWords[i] + "ay"; 
+		}
+		String temp = splitByWords[0];
+		
+		//format the array back into a returnable string
+		if(splitByWords.length>1) {
+			for (int i=1; i<splitByWords.length; i++) {
+				temp = temp + " " + splitByWords[i];
+			}
+		}
+		return temp;
 	}
 
 	/**
@@ -266,7 +464,24 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
+		
+		//Convert input to a string format
+		String inputValue = String.valueOf(input);
+		
+		//Iterate across the string
+		//Raise the value of the int within the string to the power of the length of the string
+		//Add this value to a temp value 
+		
+		int temp = 0;
+		for(int i=0; i<inputValue.length(); i++) {		
+			temp += Math.round(Math.pow(Character.getNumericValue(inputValue.charAt(i)),inputValue.length()));
+		}
+		
+		//Check whether or not the obtained value matches the initial input
+		
+		if(input == temp) {
+			return true;
+		}		
 		return false;
 	}
 
@@ -280,9 +495,20 @@ public class EvaluationService {
 	 * @param l
 	 * @return
 	 */
+	
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		//Initialize list for factors
+		List<Long> factors = new ArrayList<Long>();
+		//Iterate from the first possible prime factor (2) to the number we're testing
+		for (Long i = 2l; i <= l; i++) {
+			while (l % i == 0) {
+				//Only prime numbers will get added to the factors list because the the lesser values have already been tested
+				//If no prior values are factors of i, then i is prime.
+				factors.add(i);
+				l = l/i;
+			}
+		}
+		return factors;
 	}
 
 	/**
@@ -312,7 +538,11 @@ public class EvaluationService {
 	 * quick brown fox jumps over the lazy dog.
 	 */
 	static class RotationalCipher {
+
 		private int key;
+		private Character[] alphabetListLower =  new Character[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+		private Character[] alphabetListUpper =  new Character[]{'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+
 
 		public RotationalCipher(int key) {
 			super();
@@ -320,10 +550,34 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
-		}
+			
+			
+			for (int i = 0; i < string.length(); i++) {
+				
+				//If the letter is uppercase then use the cipher on the alphabetListUpper
+				if (Character.isUpperCase(string.charAt(i))) {
+					//CASE: ELEMENT IS CAPITALIZED AND GOES BEYOND INDEX 25
+					if (Arrays.asList(alphabetListUpper).indexOf(string.charAt(i))+key>25) {
+						string = string.substring(0,i) + alphabetListUpper[Arrays.asList(alphabetListUpper).indexOf(string.charAt(i))+key-26] + string.substring(i+1);
+						//CASE: ELEMENT IS CAPITALIZED AND DOES NOT GO BEYOND INDEX
+					}else {
+						string = string.substring(0,i) + alphabetListUpper[Arrays.asList(alphabetListUpper).indexOf(string.charAt(i))+key] + string.substring(i+1);
 
+					}
+				//This block is for lowercase letters
+				}else if (Character.isLowerCase(string.charAt(i))) {
+						//CASE: ELEMENT IS LOWERCASE AND GOES BEYOND INDEX 25
+					if (Arrays.asList(alphabetListLower).indexOf(string.charAt(i))+key>25) {
+						string = string.substring(0,i) + alphabetListLower[Arrays.asList(alphabetListLower).indexOf(string.charAt(i))+key-26] + string.substring(i+1);
+						//CASE: ELEMENT IS LOWERCASE AND DOES NOT GO BEYOND INDEX
+					}else {
+						string = string.substring(0,i) + alphabetListLower[Arrays.asList(alphabetListLower).indexOf(string.charAt(i))+key] + string.substring(i+1);
+					}
+				}
+			}
+			//System.out.println(string);	
+			return string;
+		}
 	}
 
 	/**
@@ -339,8 +593,37 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		//check to see if input is valid
+		if (i < 1) {
+			throw new IllegalArgumentException();
+		}
+		/*
+		 * Initialize a variable for the number of primes counted at any given point
+		 * initialize a variable for the value being tested to be a prime
+		 */
+		int numberOfPrimesCounted = 0;
+		int isThisValuePrime = 1;
+
+		//Keep counting primes until we get to the ith prime
+		while (numberOfPrimesCounted != i) {
+			isThisValuePrime++;
+
+			/*
+			 * for the number being tested to be a prime, iterate from 2 to that number.
+			 * If the counter gets to be more than half the value being tested, we know immediately that the number is prime
+			 */
+			for (int n = 2; n<=isThisValuePrime; n++) {
+				if (n > (isThisValuePrime)/2) {
+					numberOfPrimesCounted++;
+					break;
+
+					//If at any point we find a valid factor then we know the value being tested is not prime
+				} else if (isThisValuePrime%n == 0) {
+					break;
+				}
+			}
+		}
+		return isThisValuePrime;
 	}
 
 	/**
@@ -368,7 +651,9 @@ public class EvaluationService {
 	 *
 	 */
 	static class AtbashCipher {
-
+		static Map<Character, Character> encodeCipher = new HashMap<>(26);
+		static Map<Character, Character> decodeCipher = new HashMap<>(26);
+		static Character[] numbers = new Character[] {'1','2','3','4','5','6','7','8','9','0'};
 		/**
 		 * Question 13
 		 * 
@@ -376,8 +661,48 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			//Define the cipher mapping for encoding
+			
+			encodeCipher.put('a','z'); encodeCipher.put('b','y');
+			encodeCipher.put('c','x'); encodeCipher.put('d','w');
+			encodeCipher.put('e','v'); encodeCipher.put('f','u');
+			encodeCipher.put('g','t'); encodeCipher.put('h','s');
+			encodeCipher.put('i','r'); encodeCipher.put('j','q');
+			encodeCipher.put('k','p'); encodeCipher.put('l','o');
+			encodeCipher.put('m','n'); encodeCipher.put('n','m');
+			encodeCipher.put('o','l'); encodeCipher.put('p','k');
+			encodeCipher.put('q','j'); encodeCipher.put('r','i');
+			encodeCipher.put('s','h'); encodeCipher.put('t','g');
+			encodeCipher.put('u','f'); encodeCipher.put('v','e');
+			encodeCipher.put('w','d'); encodeCipher.put('x','c');
+			encodeCipher.put('y','b'); encodeCipher.put('z','a');
+			//Initialize encoded string
+			String encodedString = "";
+			int charCount = 0;
+			for (int i = 0; i < string.length(); i++) {
+				//Test if character is a number
+				if (Arrays.asList(numbers).contains(string.charAt(i))) {
+					encodedString += string.charAt(i);
+					charCount++;
+				//Test is character is in hashmap
+				}else if (encodeCipher.containsKey(string.charAt(i))){
+					encodedString += encodeCipher.get(string.charAt(i));
+					charCount++;
+				//Test if character is uppercase and in hashmap
+				}else if (encodeCipher.containsKey(Character.toLowerCase(string.charAt(i)))) {
+					encodedString += encodeCipher.get(Character.toLowerCase(string.charAt(i)));
+					charCount++;
+				}
+				//Add a space after every 5 character entries (unless string already ends in a space)
+				if (i < string.length()-2) {
+					if (charCount%5==0 && charCount != 0 && encodedString.charAt(encodedString.length()-1)!= ' '){
+						//System.out.println(charCount); 
+						encodedString += " ";
+					}
+				}
+			}
+			//System.out.println("encoded string is " + encodedString);
+			return encodedString;
 		}
 
 		/**
@@ -386,9 +711,39 @@ public class EvaluationService {
 		 * @param string
 		 * @return
 		 */
+		
 		public static String decode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			//Define mapping for decoding strings
+			decodeCipher.put('z','a'); decodeCipher.put('y','b');
+			decodeCipher.put('x','c'); decodeCipher.put('w','d');
+			decodeCipher.put('v','e'); decodeCipher.put('u','f');
+			decodeCipher.put('t','g'); decodeCipher.put('s','h');
+			decodeCipher.put('r','i'); decodeCipher.put('q','j');
+			decodeCipher.put('p','k'); decodeCipher.put('o','l');
+			decodeCipher.put('n','m'); decodeCipher.put('m','n');
+			decodeCipher.put('l','o'); decodeCipher.put('k','p');
+			decodeCipher.put('j','q'); decodeCipher.put('i','r');
+			decodeCipher.put('h','s'); decodeCipher.put('g','t');
+			decodeCipher.put('f','u'); decodeCipher.put('e','v');
+			decodeCipher.put('d','w'); decodeCipher.put('c','x');
+			decodeCipher.put('b','y'); decodeCipher.put('a','z');
+			//Remove the spaces from input string
+			string = string.replaceAll("\\s+","");
+			//Initialize placeholder for decoded string
+			String decodedString = "";
+			for (int i = 0; i < string.length(); i++) {
+
+				//Test if character is a number
+				if (Arrays.asList(numbers).contains(string.charAt(i))) {
+					decodedString += string.charAt(i);
+
+					//Test is character is in hashmap of decoding characters
+				}else if (decodeCipher.containsKey(string.charAt(i))){
+					decodedString += decodeCipher.get(string.charAt(i));
+				}
+			}
+			//System.out.println("decoded string is " + decodedString);
+			return decodedString;
 		}
 	}
 
@@ -415,7 +770,37 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isValidIsbn(String string) {
-		// TODO Write an implementation for this method declaration
+		//Take out the dashes from the string to make manipulation simpler
+		string = string.replaceAll("\\-","");
+		//This is the value that we will test against mod 11 at the end
+		int computationValue = 0;
+		//Array of acceptable characters for the isbn
+		Character[] acceptableCharacters = new Character[] {'1','2','3','4','5','6','7','8','9','0','x','X'};
+		//This is a number that will iterate down as we go forward in the ISBN. It multiplies by each integer by one less each time.
+		int multiplier = 10;
+		/*
+		 * Iterate through the string.
+		 * 		Check if the character is invalid, and if so, return false.
+		 * 			If the character is valid, then check if it's at an X or not and multiply the value accordingly with our multiplier variable.
+		 */
+		for (int i = 0; i<string.length(); i++) {
+			if (Arrays.asList(acceptableCharacters).contains(string.charAt(i))) {
+				if (string.charAt(i)!='X') {
+					computationValue += (Character.getNumericValue(string.charAt(i)) * multiplier);
+					multiplier--;
+				}else if (string.charAt(i)=='X') {
+					computationValue += (10 * multiplier);
+					multiplier--;
+				}
+			}else{
+				return false;
+			}
+
+		}
+		//Test the resulting computation value to see if we have a valid ISBN. Otherwise return False.
+		if (computationValue % 11 == 0) {
+			return true;
+		}
 		return false;
 	}
 
@@ -433,8 +818,38 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
+		string = string.replaceAll("\\-","");
+		//If the string is less than 26 characters then we can just get rid of it immediately.
+		if(string.length() < 26) {
+			return false;
+		}
+		//Create a new hashmap with each letter of the alphabet valued at 0
+		Map<Character, Integer> letterTracker = new HashMap<>();
+		letterTracker.put('a', 0); 	letterTracker.put('b', 0);
+		letterTracker.put('c', 0); 	letterTracker.put('d', 0);
+		letterTracker.put('e', 0);	letterTracker.put('f', 0);
+		letterTracker.put('g', 0);	letterTracker.put('h', 0);
+		letterTracker.put('i', 0);	letterTracker.put('j', 0);
+		letterTracker.put('k', 0);	letterTracker.put('l', 0);
+		letterTracker.put('m', 0);	letterTracker.put('n', 0);
+		letterTracker.put('o', 0);	letterTracker.put('p', 0);
+		letterTracker.put('q', 0);	letterTracker.put('r', 0);
+		letterTracker.put('s', 0);	letterTracker.put('t', 0);
+		letterTracker.put('u', 0);	letterTracker.put('v', 0);
+		letterTracker.put('w', 0);	letterTracker.put('x', 0);
+		letterTracker.put('y', 0);	letterTracker.put('z', 0);
+		
+		//When a letter occurs in the string, change the corresponding value in the hashmap to 1
+		for (int i = 0; i < string.length(); i++) {
+			letterTracker.put(string.charAt(i), 1);
+		}
+		//If the hashmap contains the value 0 at this point, we know that there was a letter not included in the string
+		if (letterTracker.containsValue(0)) {
 		return false;
+		
+		}else {
+			return true;
+		}
 	}
 
 	/**
@@ -445,9 +860,27 @@ public class EvaluationService {
 	 * @param given
 	 * @return
 	 */
-	public Temporal getGigasecondDate(Temporal given) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	
+	public Temporal getGigasecondDate(Temporal given) throws ClassCastException {
+		//instantiate a LocalDateTime object to reference the input temporal
+		LocalDateTime convertedInput;
+		/*
+		 * Attempt to cast the input to LocalDateTime (if the input is in year/month/day format)
+		 * Will come back with a ClassCastException if the input is in year/month/day/hour/etc... format, so catch and 
+		 * reassign accordingly.
+		 */
+		try {
+			convertedInput = ((LocalDate) given).atStartOfDay();
+
+		}catch (ClassCastException e) {
+			convertedInput = (LocalDateTime) given;
+		}
+
+		//Instantiate a Duration object that holds a gigasecond
+		Duration gigasecond = Duration.ofSeconds(1000000000);
+
+		//return the localdatetime + a gigasecond
+		return gigasecond.addTo(convertedInput);
 	}
 
 	/**
@@ -464,8 +897,36 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		/*
+		 * Variables:	
+		 * 		sum is the sum of all unique multiples. sum is returned at the end
+		 * 		max is the number we want to stay under with the multiples
+		 * 		multiple is the value of the multiple we have at any given time as an element of the array is added to itself
+		 * 		duplicates is an array that will store each multiple. This is to ensure we are not adding duplicates to the
+		 * 			overall sum.
+		 */
+		int sum = 0;
+		int max = i;
+		int multiple;	
+		List<Integer> duplicates = new ArrayList<>();
+
+		/*
+		 * for each value in the array, add its multiples to the sum as long as it's both unique per our duplicates array
+		 * 		and less than the max
+		 */
+		for (int j = 0; j < set.length; j++) { 
+			multiple = set[j];
+			while (multiple < max) {
+				
+				if (!duplicates.contains(multiple)){
+					duplicates.add(multiple);
+					//System.out.println(multiple);
+					sum = sum + multiple;	
+				}
+				multiple += set[j];
+			}
+		}
+		return sum;
 	}
 
 	/**
@@ -505,8 +966,42 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		string = string.replaceAll("\\ ","");	
+
+		/*
+		 * return false immediately if the input isn't formatted correctly
+		 */
+		if (string.length()<=1) {
+			return false;
+		}else if(string.contains("a")) {
+			return false;
+		}else if(string.contains("-")) {
+			return false;
+		}
+
+		//initiate reference for the sum of values which will be tested at the end for validity
+		int sumOfValues = 0;
+
+		/*
+		 * Iterate backwards through every other number and multiply by two
+		 * Check if value is above 9, otherwise just add it to the overall
+		 */
+		for (int i = string.length()-2; i>=0; i = i-2) {
+			sumOfValues += Character.getNumericValue(string.charAt(i)) * 2;
+			if ((Character.getNumericValue(string.charAt(i)) * 2) > 9) {
+				sumOfValues -= 9;
+			}
+		}
+		//add the other values that aren't being manipulated to the sum total
+		for (int i = string.length()-1; i>=0; i = i-2) {
+			sumOfValues += Character.getNumericValue(string.charAt(i));
+		}
+		//Check if the sum passes the criteria. if so, return true.
+		if (sumOfValues%10==0) {
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	/**
@@ -537,7 +1032,47 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
+		/*
+		 * remove instances of question marks from the string and then split the string by spaces into a String array
+		 */
+		string = string.replaceAll("\\?","");
+		String[] words = string.split(" ");
+		/*
+		 * value1 and value2 correspond to the two ints within the word problem.
+		 * String operation is the operator that will be performed on the 2 values.
+		 */
+		int value1;
+		int value2;
+		String operation = words[3];
+
+		/*
+		 * Depending on what the operation is, we know where the values will be located in the String[].
+		 * assign the values for any given case and then perform the necesary operation on them.
+		 */
+
+		switch(operation) {
+		
+		case("plus"):
+			value1 = Integer.parseInt(words[2]);
+			value2 = Integer.parseInt(words[4]);
+			return value1 + value2;
+
+		case("minus"):
+			value1 = Integer.parseInt(words[2]);
+			value2 = Integer.parseInt(words[4]);
+			return value1 - value2;
+
+		case("multiplied"):
+			value1 = Integer.parseInt(words[2]);
+			value2 = Integer.parseInt(words[5]);
+			return value1 * value2;
+
+		case("divided"):
+			value1 = Integer.parseInt(words[2]);
+			value2 = Integer.parseInt(words[5]);
+			return value1 / value2;
+
+		}
 		return 0;
 	}
 

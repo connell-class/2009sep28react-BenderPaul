@@ -368,7 +368,6 @@ public class EvaluationServiceTest {
 	/*******************************************************************
 	 * Question 10
 	 ******************************************************************/
-
 	@Test
 	public void testPrimeNumber() {
 		assertEquals(Collections.singletonList(2L), evaluationService.calculatePrimeFactorsOf(2L));
