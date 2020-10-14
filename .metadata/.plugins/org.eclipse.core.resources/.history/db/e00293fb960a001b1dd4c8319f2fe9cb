@@ -1,0 +1,66 @@
+package com.projectzero.repo;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
+
+import com.projectzero.config.EnvironmentConnectionUtil;
+import com.projectzero.model.Car;
+//import org.omg.CORBA.*;
+
+
+public class CarDao implements DaoContract<Car, Integer>{
+
+	
+	public CarDao() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public List<Car> findAll() {
+		List<Car> cars = new LinkedList<>();
+		try (Connection conn = EnvironmentConnectionUtil.getInstance().getConnection()){
+			Statement s = conn.createStatement();
+			String sql = "selec * from cars";
+			ResultSet rs = s.executeQuery(sql);
+			while (rs.next()) {
+				cars.add(new Car(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getBoolean(7)));
+			}
+			rs.close();
+			s.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cars;
+	}
+
+	@Override
+	public Car findById(Integer i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Car update(Car t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Car create(Car t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int delete(Integer i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}
+
+
+

@@ -1,0 +1,42 @@
+package com.projectzero.ui;
+
+import java.util.Scanner;
+
+import com.projectzero.controller.CustomerController;
+
+public class CustomerMenu {
+
+	private CustomerController cc;
+	
+	public CustomerMenu() {
+		this(new CustomerController());
+	}
+	
+	public CustomerMenu(CustomerController cc) {
+		super();
+		this.cc = cc;
+	}
+	
+	public String CustomerMenu(Scanner scan) {
+		System.out.println("\nWhat would you like to do?");
+		System.out.println("1. Login to existing customer account");
+		System.out.println("2. Register new customer account");
+		System.out.println("0. Return to Main Menu");
+		int selection = scan.nextInt();
+		switch(selection) {
+		case 1:
+			//cc.login
+		case 2:
+			//cc.register
+		case 3:
+			return null;
+		default: 
+			return CustomerMenu(scan);
+		}
+	
+	
+	
+	
+	}
+	
+}

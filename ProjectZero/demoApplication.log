@@ -1,0 +1,34 @@
+2020-10-13 16:51:24 INFO  Driver:102 - Initiating Main Menu
+2020-10-13 17:01:02 INFO  Driver:102 - Initiating Main Menu
+2020-10-13 17:01:04 INFO  Driver:119 - User accessing customer menu
+2020-10-13 17:01:50 INFO  Driver:102 - Initiating Main Menu
+2020-10-13 17:01:53 INFO  Driver:119 - User accessing customer menu
+2020-10-13 17:09:53 INFO  Driver:101 - Initiating Main Menu
+2020-10-13 17:10:34 INFO  Driver:101 - Initiating Main Menu
+2020-10-13 17:10:43 INFO  Driver:123 - User accessing employee menu
+2020-10-13 17:10:49 INFO  CustomerMenu:41 - Employee number 3 logged into the system.
+2020-10-13 18:43:47 INFO  Driver:101 - Initiating Main Menu
+2020-10-13 18:44:13 INFO  Driver:118 - User accessing customer menu
+2020-10-13 18:44:29 INFO  Driver:101 - Initiating Main Menu
+2020-10-13 18:44:31 INFO  Driver:118 - User accessing customer menu
+2020-10-13 18:44:37 INFO  CustomerMenu:42 - Employee number 8 logged into the system.
+2020-10-13 18:44:42 INFO  CustomerDealershipMenu:51 - Customer viewing cars in lot
+2020-10-13 18:45:51 INFO  CustomerDealershipMenu:84 - Employee number 8 logged out of the system.
+2020-10-13 18:45:51 INFO  Driver:101 - Initiating Main Menu
+2020-10-13 18:45:52 INFO  Driver:123 - User accessing employee menu
+2020-10-13 18:45:58 INFO  CustomerMenu:41 - Employee number 3 logged into the system.
+2020-10-13 18:48:28 INFO  Driver:101 - Initiating Main Menu
+2020-10-13 18:48:32 INFO  Driver:123 - User accessing employee menu
+2020-10-13 18:48:38 INFO  CustomerMenu:41 - Employee number 3 logged into the system.
+2020-10-13 18:49:16 INFO  Driver:101 - Initiating Main Menu
+2020-10-13 18:49:18 INFO  Driver:123 - User accessing employee menu
+2020-10-13 18:49:24 INFO  CustomerMenu:41 - Employee number 3 logged into the system.
+2020-10-13 18:49:56 INFO  Driver:101 - Initiating Main Menu
+2020-10-13 18:49:58 INFO  Driver:118 - User accessing customer menu
+2020-10-13 18:50:19 INFO  CustomerMenu:42 - Employee number 5 logged into the system.
+2020-10-13 18:50:22 INFO  CustomerDealershipMenu:51 - Customer viewing cars in lot
+2020-10-13 18:52:30 INFO  Driver:101 - Initiating Main Menu
+2020-10-13 18:52:32 INFO  Driver:118 - User accessing customer menu
+2020-10-13 18:52:39 INFO  CustomerMenu:42 - Employee number 5 logged into the system.
+2020-10-13 18:53:53 INFO  CustomerDealershipMenu:84 - Employee number 5 logged out of the system.
+2020-10-13 18:53:53 INFO  Driver:101 - Initiating Main Menu

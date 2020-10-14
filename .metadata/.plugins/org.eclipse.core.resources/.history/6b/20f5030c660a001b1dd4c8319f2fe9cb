@@ -1,0 +1,12 @@
+package com.projectzero.repo;
+
+public class DaoUtil {
+
+	/*
+	 * 
+	 *@ TODO THIS IS WHERE OUR SQL PREPARED STATEMENTS GO
+	 * 
+	 * 
+	 */
+	
+}

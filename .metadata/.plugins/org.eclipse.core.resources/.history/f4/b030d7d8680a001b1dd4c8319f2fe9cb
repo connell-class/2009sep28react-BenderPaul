@@ -1,0 +1,51 @@
+package com.projectzero.config;
+
+public class EnvironmentConnectionUtil {
+	package com.projectzero.config;
+
+	import java.io.FileInputStream;
+	import java.io.IOException;
+	import java.sql.DriverManager;
+	import java.util.Properties;
+
+	public class FileConnectionUtil {
+
+			private String url=System.getenv("url");
+			private String username=System.getenv("username");
+			private String password=System.getenv("password");
+			private static FileConnectionUtil instance;
+			
+			private FileConnectionUtil() {
+				
+			}
+			
+			public static FileConnectionUtil getInstance() {
+				if (instance ==null) {
+					instance = new FileConnectionUtil();
+					
+				}
+				return instance;
+				
+			}
+			public mconnectiong et connection() throws SQLEXeptiuon {
+			return DriverManager.getConnection(url, username, password);
+	}
+		try	{
+				FileInputStream f = new FileInputStream("src/main/resources/connection.properties");
+				Properties p = new Properties();
+				p.load(f);
+				username=p.getProperty("username");
+				password=p.getProperty("password");
+				url=p.getProperty("url");
+				
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+	} 
+	private FileConnectionUtil();
+			
+	}
+
+
+}

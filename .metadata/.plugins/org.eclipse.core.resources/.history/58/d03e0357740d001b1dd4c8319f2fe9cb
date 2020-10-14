@@ -1,0 +1,68 @@
+package com.projectzero.ui;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import com.projectzero.controller.CustomerController;
+import com.projectzero.model.Customer;
+
+public class CustomerMenu {
+	
+	private CustomerController cc;
+	private CustomerDealershipMenu cdm = new CustomerDealershipMenu(cc);
+	
+	public CustomerMenu() {
+		this(new CustomerController());
+	}
+	
+	public CustomerMenu(CustomerController cc) {
+		super();
+		this.cc = cc;
+	}
+	
+	public String customerMenu (Scanner scan) {
+		//System.out.println(cc.findAll().toString());
+		//List<String> verifyLogin = new ArrayList<>();
+		String username = null;
+		String password = null;
+		System.out.println("\nWhat would you like to do?");
+		System.out.println("1. Login to existing customer account");
+		System.out.println("2. Register new customer account");
+		System.out.println("0. Return to Main Menu");
+		String selection = scan.next();
+		switch(selection) {
+		case "1":
+			System.out.println("Enter your username:");
+			username = scan.next();
+			//verifyLogin.add(scan.next());
+			System.out.println("Enter your password:");
+			password = scan.next();
+			System.out.println("Enter your unique customer number:");
+			int customerArtifact = scan.nextInt();
+			//verifyLogin.add(scan.next());
+			//System.out.println(username + " + " + password);
+			if (customerArtifact>0) {
+				//scan.close();
+				cdm.customerDealershipMenu(cc.findById(customerArtifact), scan);
+				break;
+			}
+			else {
+				System.out.println("Invalid Login Credentials");
+				customerMenu(scan);
+			}
+			break;
+		case "2":
+			Customer newCustomer = new Customer();
+			cc.create(newCustomer);
+			customerMenu(scan);
+			break;
+		case "0":
+			return null;
+		default:
+			System.out.println("Invalid entry");
+			customerMenu(scan);
+		}
+		return null;
+	}	
+}

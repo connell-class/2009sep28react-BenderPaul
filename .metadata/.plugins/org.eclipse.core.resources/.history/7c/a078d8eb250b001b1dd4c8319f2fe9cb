@@ -1,0 +1,89 @@
+package com.projectzero.model;
+
+import java.math.BigDecimal;
+
+public class Car {
+
+	private int tagId;
+	private int year;
+	private String make;
+	private String model;
+	private String color;
+	private BigDecimal defaultPrice;
+	private boolean existingOffer;
+	
+	/*
+	 * GETTERS AND SETTERS
+	 */
+	public int getTagId() {
+		return tagId;
+	}
+	public void setTagId(int tagId) {
+		this.tagId = tagId;
+	}
+	public int getYear() {
+		return year;
+	}
+	public void setYear(int year) {
+		this.year = year;
+	}
+	public String getMake() {
+		return make;
+	}
+	public void setMake(String make) {
+		this.make = make;
+	}
+	public String getModel() {
+		return model;
+	}
+	public void setModel(String model) {
+		this.model = model;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public BigDecimal getDefaultPrice() {
+		return defaultPrice;
+	}
+	public void setDefaultPrice(BigDecimal defaultPrice) {
+		this.defaultPrice = defaultPrice;
+	}
+	public boolean isExistingOffer() {
+		return existingOffer;
+	}
+	public void setExistingOffer(boolean existingOffer) {
+		this.existingOffer = existingOffer;
+	}
+	
+	/*
+	 * 
+	 * TOSTRING() METHOD
+	 */
+	@Override
+	public String toString() {
+		return "Car tagId=" + tagId + ", year=" + year + ", make=" + make + ", model=" + model + ", color=" + color
+				+ ", defaultPrice=" + defaultPrice + ", has an existing offer? " + existingOffer+ "\n";
+	}
+	
+	/*
+	 * 
+	 * CONSTRUCTORS
+	 */
+	public Car(int tagId, int year, String make, String model, String color, BigDecimal defaultPrice, boolean existingOffer) {
+		super();
+		this.tagId = tagId;
+		this.year = year;
+		this.make = make;
+		this.model = model;
+		this.color = color;
+		this.defaultPrice = defaultPrice;
+		this.existingOffer = existingOffer;
+	}
+	public Car() {
+		super();
+		// TODO Auto-generated constructor stub
+	}	
+}

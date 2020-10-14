@@ -1,0 +1,12 @@
+package com.projectzero.repo;
+import java.sql.Connection;
+
+public class CarDao implements DaoContract<Car, Integer>{
+
+
+	
+	
+}
+
+
+

@@ -1,0 +1,5 @@
+package com.projectzero.repo;
+
+public class SellingHistoryDao {
+
+}

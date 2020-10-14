@@ -1,0 +1,12 @@
+package com.projectzero.ui;
+
+public class CustomerLoginMenu {
+
+	/*
+	 * TODO take in the username, password credentials
+	 * TODO test thosed against the customer table
+	 * TODO 	redirect to the customerdealership menu
+	 * TODO		else deny entry and give them options
+	 */
+	
+}

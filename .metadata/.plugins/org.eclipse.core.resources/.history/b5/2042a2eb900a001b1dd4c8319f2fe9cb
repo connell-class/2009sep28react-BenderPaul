@@ -1,0 +1,39 @@
+package com.projectzero.repo;
+import java.sql.Connection;
+import java.util.List;
+
+public class CarDao implements DaoContract<Car, Integer>{
+
+	@Override
+	public List<Car> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Car findById(Integer i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Car update(Car t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Car create(Car t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int delete(Integer i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}
+
+
+

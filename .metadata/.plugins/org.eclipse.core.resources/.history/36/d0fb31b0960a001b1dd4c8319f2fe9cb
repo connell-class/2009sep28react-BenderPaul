@@ -1,0 +1,21 @@
+package com.projectzero.service;
+import java.util.List;
+
+public class CarService {
+
+	private CarDao cd;
+	
+	public CarService() {
+		this(new CarDao());
+	}
+	
+	public CarService(CarDao cd) {
+		super();
+		this.cd = cd;
+	}
+	
+	public List<Car> findAll(){
+		return cd.findAll();
+	}
+	
+}

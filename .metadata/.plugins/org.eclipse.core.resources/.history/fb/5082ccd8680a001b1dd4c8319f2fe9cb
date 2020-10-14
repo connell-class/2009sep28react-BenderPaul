@@ -1,0 +1,5 @@
+package com.projectzero.model;
+
+public class Customer {
+
+}

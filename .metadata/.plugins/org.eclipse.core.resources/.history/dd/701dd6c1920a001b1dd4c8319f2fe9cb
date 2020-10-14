@@ -1,0 +1,20 @@
+package com.projectzero.controller;
+import java.util.List;
+
+public class CarController {
+
+	private CarService cs;
+
+	public carController() {
+		this(new carService());
+	}
+
+	public CarController(CarService) {
+		super();
+		this.cs = cs;
+	}
+
+	public List<Car> findAll(){
+		return cs.findAll();
+	}
+}

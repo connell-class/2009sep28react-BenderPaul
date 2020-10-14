@@ -1,0 +1,20 @@
+package NotesTest;
+
+import Notes.*;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.*;
+
+public class NotesTest {
+
+	Notes test = new Notes();
+	
+	@Test
+	public void testNotesGreet() {
+	assertEquals("hello world", test.greet());
+	//test.greet(){
+	
+	//}
+}
+}

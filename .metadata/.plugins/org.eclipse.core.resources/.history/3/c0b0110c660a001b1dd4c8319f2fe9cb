@@ -1,0 +1,76 @@
+package Notes;
+
+/*
+ * 
+ * REQUIREMENTS:
+ * 		Data is stored/retrieved from a database
+ * 		Has custom stored procedure
+ * 		Using DAO design patter
+ * 		Log4j is implemented to log events to a file
+ * 		At least one Junit Test
+ * 
+ *  Employee actions:
+ *  	Add cars to lot
+ *  	accept or reject car offers
+ *  	can remove cars from lot
+ *  	Can view all payments
+ *  	Can edit existing cars
+
+ *  User actions
+ *  	Can login
+ *  	Can register for customer account
+ *  	Can make payments
+ *  
+ *  Customer actions
+ *  	View cars in the lot
+ *  	Make offers on the cars
+ *  	View cars that I own
+ *  	View remaining payments for the cars
+ *  	
+ * 	System Actions
+ * 		Can reject all other pending offers for a car when an offer is accepted
+ * 		Can calculate monthly payment
+ * 
+ * 	Manager Actions
+ * 		Can make employee accounts
+ * 		Can fire employees
+ * 		Can view a sales history of all offers
+ * 
+ * THIS IS THE STUFF HE SAYS WHEN I ASK HIM ABOUT THE CURRENT PACKAGE SETUP
+ * 
+ * buffer input instead of scanner? ALL PREPARED STATEMENTS
+ * 
+ * 
+ * 
+ * driver - main method - one layer above the others
+ * 
+ * config - configuration package-ware
+ * 
+ * UI - designed to take in informatrionf rom user, give user information, set up a nice user interface
+ * 
+ * controller - ui sends information to the controller, controller sends information back to ui
+ * 
+ * service - takes information from controller, communicates with repository and controller (separates
+ * 				logic between controller and database (for big boy organization)
+ * 
+ * repository - dao design layer. every form of communication with database happens here
+ * 
+ * model - models your database - should be essentially a copy of your database - mimic database as much as possible.
+ * 			can deconstruct objects and send to databas easily because it mimics all properties.
+ * 
+ * 
+ * makhida? for testing?
+ * 
+ * 
+ *  
+ */
+
+public class Notes {
+	
+}
+/*public static void main(String[] args) {
+	System.out.println("Hello, World");
+}*/
+	
+
+

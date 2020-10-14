@@ -1,0 +1,129 @@
+package com.projectzero.repo;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.InputMismatchException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+
+import org.w3c.dom.Text;
+
+import com.projectzero.config.EnvironmentConnectionUtil;
+import com.projectzero.model.Car;
+//import org.omg.CORBA.*;
+
+
+public class CarDao implements DaoContract<Car, Integer>{
+
+	
+	public CarDao() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public List<Car> findAll() {
+		List<Car> cars = new LinkedList<>();
+		try (Connection conn = EnvironmentConnectionUtil.getInstance().getConnection()){
+			Statement s = conn.createStatement();
+			String sql = "select * from cars";
+			ResultSet rs = s.executeQuery(sql);
+			while (rs.next()) {
+				cars.add(new Car(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBigDecimal(6), rs.getBoolean(7)));
+			}
+			rs.close();
+			s.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cars;
+	}
+
+	@Override
+	public Car findById(Integer i) {
+		Car findCar = null;
+		String sqlQuery = "select * from cars where tag_id = ?";
+		try (Connection conn = EnvironmentConnectionUtil.getInstance().getConnection(); PreparedStatement ps = conn.prepareStatement(sqlQuery)){
+			ps.setInt(1, i);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				findCar = new Car(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBigDecimal(6), rs.getBoolean(7));
+			}
+			rs.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return findCar;
+	}
+
+	@Override
+	public Car update(Car t) {
+		int price = 0;
+		Scanner newPrice = new Scanner(System.in) ;
+		//Ask the user for a new price to set the car at
+		System.out.println("Enter new price: ");
+		try {
+			price = newPrice.nextInt();
+		} catch (InputMismatchException e){
+			System.out.println("Invalid format: Enter a price from 0 - 2147483647\n");
+			update(t);
+		}
+		String sqlQuery = "update cars set default_price = ? where tag_id = ?";
+		try (Connection conn = EnvironmentConnectionUtil.getInstance().getConnection(); PreparedStatement ps = conn.prepareStatement(sqlQuery)){
+			ps.setInt(1, price);
+			ps.setInt(2, t.getTagId());
+			ps.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("\nCar price successfully updated.");
+		return t;
+	}
+
+	@Override
+	public Car create(Car t) {
+		Scanner carDetails = new Scanner(System.in);
+		String sqlQuery = "call add_car_to_lot(?,?,?,?,?,?)";
+		try (Connection conn = EnvironmentConnectionUtil.getInstance().getConnection(); PreparedStatement ps = conn.prepareStatement(sqlQuery)){	
+			
+			try {
+			
+			System.out.println("\nEnter new car's Year: ");
+			ps.setInt(1,carDetails.nextInt());
+			System.out.println("\nEnter new car's Make: ");
+			ps.setString(2,carDetails.next());
+			System.out.println("\nEnter new car's Model: ");
+			ps.setString(3,carDetails.next());
+			System.out.println("\nEnter new car's Color: ");
+			ps.setString(4,carDetails.next());
+			System.out.println("\nEnter new car's Initial Price: ");
+			ps.setBigDecimal(5,carDetails.nextBigDecimal());
+			System.out.println("\nDoes the new car already have a purchase offer? true/false: ");
+			ps.setBoolean(6,(boolean)carDetails.nextBoolean());
+			
+			}catch (InputMismatchException e) {
+				System.out.println("Invalid format Entered. Please try again.\n");
+				create(t);
+			}
+		
+			ps.execute();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("\nCar added successfully\n");
+		return t;
+	}
+
+	@Override
+	public int delete(Integer i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}
+
+
+

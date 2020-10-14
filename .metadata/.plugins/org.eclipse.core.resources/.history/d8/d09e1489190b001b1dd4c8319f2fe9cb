@@ -1,0 +1,83 @@
+package com.projectzero;
+
+import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import com.projectzero.repo.CarDao;
+import com.projectzero.ui.DealershipMenu;
+
+public class Driver {
+	
+	private static DealershipMenu dealershipMenu = new DealershipMenu();
+	/*
+	 * TODO instantiate other menus after they've been created
+	 */
+
+	public static void main(String[] args){
+		Scanner userInput = new Scanner(System.in);
+		mainMenu(userInput);
+	}
+	
+	
+	
+	
+	private static void mainMenu(Scanner reader) throws InputMismatchException{
+		System.out.println("template for dealership page");
+		System.out.println("make a dang option");
+		System.out.println("1. cars");
+		System.out.println("2. employee login");
+		System.out.println("3. customer login");
+		System.out.println("0. Exit\n");
+		String chosenOption = reader.nextLine();
+		switch(chosenOption) {
+			case "1":
+				System.out.println("good choice 1");
+				CarDao bd = new CarDao();
+				System.out.println(bd.findById(3));
+				/*
+				 * TODO Replace with another menu
+				 * TODO mainmenu call with buffer
+				 * TODO break
+				 */
+			case "2":
+				System.out.println("good choice 2");
+				CarDao cd = new CarDao();
+				cd.update(cd.findById(3));
+				
+				/*
+				 * TODO Replace with another menu
+				 * TODO mainmenu call with buffer
+				 * TODO break
+				 */
+			case "3":
+				System.out.println("good choice 3");
+				/*
+				 * TODO Replace with another menu
+				 * TODO mainmenu call with buffer
+				 * TODO break
+				 */
+			case "0":
+				System.out.println("Ok byyyeeeeeeeee <3");
+				System.exit(0);
+				/*
+				 * TODO Replace with another menu
+				 * TODO mainmenu call with buffer
+				 * TODO break
+				 */
+			default:
+				System.out.println("\nInvalid response: Please select a valid numerical option\n");
+				mainMenu(reader);
+				break;
+			}
+		}
+	}	
+/**
+	 * 
+	 * @TODO add the settings for the main menu. 
+	 * sysouts for the main menu options, and direct to other menus depending on the option chosen.
+	 */
+	
+	
+	
+

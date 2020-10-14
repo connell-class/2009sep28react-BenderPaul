@@ -1,0 +1,15 @@
+package com.projectzero.repo;
+
+import java.sql.CallableStatement;
+
+public class DaoUtil {
+
+	//public String callAddCarToLot
+	/*
+	 * 
+	 *@ TODO THIS IS WHERE OUR SQL PREPARED STATEMENTS GO
+	 * 
+	 * 
+	 */
+	
+}

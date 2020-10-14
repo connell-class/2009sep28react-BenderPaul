@@ -1,0 +1,79 @@
+package com.projectzero;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+import com.projectzero.ui.DealershipMenu;
+
+public class Driver {
+	
+	private static DealershipMenu dealershipMenu = new DealershipMenu();
+	/*
+	 * TODO instantiate other menus after they've been created
+	 */
+	
+	public static void main(String[] args) throws IOException {
+		Scanner userInput = new Scanner(System.in);
+		mainMenu(userInput);
+	}
+		
+	private static void mainMenu(Scanner reader) throws IOException {
+		System.out.println("template for dealership page");
+		System.out.println("make a dang option");
+		System.out.println("1. cars");
+		System.out.println("2. employee login");
+		System.out.println("3. customer login");
+		System.out.println("0. Exit");
+		try {
+			int chosenOption = reader.nextInt();
+			switch(chosenOption) {
+			
+			case 1:
+				System.out.println("good choice 1");
+				/*
+				 * TODO Replace with another menu
+				 * TODO mainmenu call with buffer
+				 * TODO break
+				 */
+				
+			case 2:
+				System.out.println("good choice 2");
+				/*
+				 * TODO Replace with another menu
+				 * TODO mainmenu call with buffer
+				 * TODO break
+				 */
+			case 3:
+				System.out.println("good choice 3");
+				/*
+				 * TODO Replace with another menu
+				 * TODO mainmenu call with buffer
+				 * TODO break
+				 */
+			case 0:
+				System.out.println("good choice 3");
+				System.exit(0);
+				/*
+				 * TODO Replace with another menu
+				 * TODO mainmenu call with buffer
+				 * TODO break
+				 */
+			}
+			throw new IOException();
+
+		} catch (IOException e) {
+			System.out.println("Invalid response: Please select a valid numerical option");
+		}
+
+		
+	}
+}	
+	/**
+	 * 
+	 * @TODO add the settings for the main menu. 
+	 * sysouts for the main menu options, and direct to other menus depending on the option chosen.
+	 */
+	
+	
+	
+
