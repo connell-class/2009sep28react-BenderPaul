@@ -1,9 +1,0 @@
-package com.projectzero;
-
-import com.projectzero.ui.DealershipMenu;
-
-public class Driver {
-
-	private static DealershipMenu mainMenu = new DealershipMenu();
-	
-}
